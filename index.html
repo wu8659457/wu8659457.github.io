@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/你好-Hexo/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/hello-hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuzt">
@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/13/你好-Hexo/" itemprop="url">你好-Hexo</a></h1>
+                <a class="post-title-link" href="/2018/03/13/hello-hexo/" itemprop="url">你好Hexo</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工作日常/" itemprop="url" rel="index">
-                    <span itemprop="name">工作日常</span>
+                  <a href="/categories/杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">杂记</span>
                   </a>
                 </span>
 
@@ -345,7 +345,52 @@
       
         
           
-            
+            <p>阿里云服务器马上到期了，一年强奸我1K的费用想来不合算，找了几家其他的云服务器 域名还要重备案，就作罢了</p>
+<p>今年是工作的第5个年头，想来也还没在组织贡献过代码，就来注册了一个，顺便把博客也转过来了。</p>
+<p>旧博客上的文章存在db里懒得转过来了，就当是重新开始吧。<br>说说我是怎么布属hexo的吧</p>
+<ol>
+<li>首先你要准备的是npm,这里我使用阿里的镜像，原因就不多说了🤣</li>
+<li>在github创建一个pages项目，参考：<a href="https://pages.github.com/" target="_blank" rel="noopener">https://pages.github.com/</a></li>
+<li>使用npm安装hexo，这里我用的是mac环境</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir blog #这里我准备把hexo相关的组件都放在blog目录下</span><br><span class="line">cd blog</span><br><span class="line">npm install hexo -g</span><br><span class="line">hexo init #初始化</span><br><span class="line">npm install #安装所需要的组件</span><br><span class="line">hexo g #首次体验Hexo</span><br><span class="line">hexo s --debug #开启本地环境</span><br></pre></td></tr></table></figure>
+<ol>
+<li>关联github</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Uname&quot;</span><br><span class="line">git config --global user.email &quot;Uemail@host.com&quot;</span><br><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C &quot;Uemail@host.com&quot; #生成密钥，id_rsa和id_rsa.pub</span><br><span class="line">eval &quot;$(ssh-agent -s)&quot; #添加密钥到ssh-agent</span><br><span class="line">ssh-add ~/.ssh/id_rsa #将生成的SSH key到ssh-agent</span><br></pre></td></tr></table></figure>
+<p>登录Github =&gt; settings，添加ssh，新建一个ssh key，将id_rsa.pub文件里的内容复制上去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com #如果看到Hi后面是你的用户名，就说明成功了</span><br></pre></td></tr></table></figure>
+<p>配置Deployment，在hexo根目录中，找到_config.yml文件，修改repo值（在末尾）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">    type: git</span><br><span class="line">    repository: #这里填上原先在github上创建的git地址</span><br></pre></td></tr></table></figure>
+<ol>
+<li>新建一篇博客</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post &quot;hello,hexo&quot;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>安装布属扩展</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<ol>
+<li>发布文章</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+<p>部署成功后访问你的地址：http://用户名.github.io。那么将看到生成的文章</p>
+<p>到这里我觉得hexo自带的皮肤太丑了，我百度了一下hexo的皮肤发现知乎上有人分享(<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">https://www.zhihu.com/question/24422335</a>) 第一个next皮肤就不错😘<br>装完之后我发现几个问题</p>
+<ol>
+<li>皮肤怎么是英文的</li>
+<li>favicon太丑了</li>
+</ol>
+<p>怎么处理？还是百度😝😝😝😝😝<br>发现根目录下的_config.yml 有几处东西可以改改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: wuztooo</span><br><span class="line">subtitle: 点点点</span><br><span class="line">description: 这是一个简单的小bloger</span><br><span class="line">author: wuzt</span><br><span class="line">language: zh-Hans</span><br><span class="line">timezone: Asia/Shanghai</span><br></pre></td></tr></table></figure>
+<p>favicon我在themes/next/_config.yml下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon.ico</span><br><span class="line">  medium: /images/favicon.ico</span><br><span class="line">  apple_touch_icon: /images/favicon.ico</span><br><span class="line">  safari_pinned_tab: /images/favicon.ico</span><br></pre></td></tr></table></figure>
+<p>最后把我们自己的域名绑定到github</p>
+<ol>
+<li>在域名后台添加CNAME解析</li>
+<li>在/hexo/source/下新建一个CNAME文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.wuzt.net</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -565,7 +610,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -576,7 +621,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
